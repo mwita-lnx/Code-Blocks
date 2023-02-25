@@ -383,6 +383,7 @@
 <body>
   <!-- partial:index.partial.html -->
   <form action="" method="POST">
+    {% csrf_token %}
     <div class="row">
       <div class="url-input">
         <div class="icon">
@@ -395,7 +396,7 @@
           <div class="favicon"></div>
         </div>
         <div class="text">
-          <input type="text" placeholder="Your URL" />
+          <input type="text" placeholder="Your URL" name="url"/>
         </div>
         <button class="clear">
           <svg viewBox="0 0 24 24">
