@@ -1,8 +1,0 @@
-import time
-def rand_num(minimum,maximum):
-    now = str(time.perf_counter())
-    rnd = float(now[::-1][:3:])/1000
-    print(minimum + rnd*(maximum-minimum))
-min = 1
-max= 20
-rand_num(min, max)
