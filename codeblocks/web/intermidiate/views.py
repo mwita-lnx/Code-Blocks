@@ -13,8 +13,6 @@ def shortener():
 
 
 
-def index(request):
-    return render(request, 'index.html')
 
 def shorten(request):
     if request.method == 'POST':
@@ -25,11 +23,11 @@ def shorten(request):
         short_url = request.build_absolute_uri('/') + short_id
         return render(request, 'index.html', {'short_url': short_url})
     else:
-        return redirect('index')
-
+       return render(request, 'index.html')
 def redirect_to_url(request, short_id):
     url = Url.objects.filter(short_id=short_id).first()
     if url:
-        return redirect(url.url)
+        return render(request, 'redirect.html', {'url':url.url })
     else:
         return HttpResponse(f'No URL found for {short_id}')
+
