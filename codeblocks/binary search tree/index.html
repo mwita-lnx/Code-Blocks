@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search Tree Code Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .form-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .tree-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-top: 20px;
+        }
+        
+        .output {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 50px auto;
+            max-width: 800px;
+        }
+        
+        .tree {
+            font-family: monospace;
+            width: 500px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #666060;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            white-space: pre;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Binary Search Tree Input</h1>
+        <p>Please enter a comma-separated list of numbers:</p>
+        <form>
+            <label for="num-list">Number List:</label>
+            <input type="text" id="num-list" name="num-list" placeholder="e.g. 3,7,1,9,4">
+            <button type="button" onclick="processInput()">Submit</button>
+        </form>
+    </div>
+
+    <div class="tree output" id="tree-display">
+        <!-- Tree output will be displayed here -->
+    </div>
+
+    <script>
+        class TreeNode {
+            constructor(key) {
+                this.key = key;
+                this.l = null;
+                this.r = null;
+            }
+        }
+
+        function newKeyInsert(root, newKey) {
+            if (root === null) {
+                root = new TreeNode(newKey);
+                return root;
+            }
+            if (newKey < root.key) {
+                root.l = newKeyInsert(root.l, newKey);
+            } else {
+                root.r = newKeyInsert(root.r, newKey);
+            }
+            return root;
+        }
+
+        function displayTree(root) {
+            let output = '';
+            if (root) {
+                output += displayTree(root.l);
+                output += root.key + '\n';
+                output += displayTree(root.r);
+            }
+            return output;
+        }
+
+        function processInput() {
+            // Get the number list input from the text field
+            const numListInput = document.getElementById('num-list').value;
+
+            // Split the number list by commas and convert to integers
+            const keys = numListInput.trim().split(',').map(key => parseInt(key));
+
+            // Build the Binary Search Tree
+            let root = null;
+            for (const key of keys) {
+                root = newKeyInsert(root, key);
+            }
+
+            // Display the output of the Binary Search Tree
+            const treeDisplay = document.getElementById('tree-display');
+            treeDisplay.textContent = displayTree(root);
+        }
+    </script>
+</body>
+
+</html>
