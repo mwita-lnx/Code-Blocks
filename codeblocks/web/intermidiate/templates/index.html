@@ -6,7 +6,6 @@
   <title>Url shortener</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Inter:400,500,600,700&amp;display=swap'>
-  <link rel="stylesheet" href="./style.css">
   <style>
     .row {
       display: flex;
@@ -382,7 +381,7 @@
 
 <body>
   <!-- partial:index.partial.html -->
-  <form action="" method="POST">
+  <form  method="POST">
     {% csrf_token %}
     <div class="row">
       <div class="url-input">
@@ -396,7 +395,7 @@
           <div class="favicon"></div>
         </div>
         <div class="text">
-          <input type="text" placeholder="Your URL" name="url"/>
+          <input type="text" placeholder="Your URL" name="url" id="url"/>
         </div>
         <button class="clear">
           <svg viewBox="0 0 24 24">
@@ -444,10 +443,9 @@
     </button>
 <br>
     </div>
-    <a id="link" href="#">the link is</a>
+    <a id="link" href="{{ short_url }}">{{ short_url }}</a>
   </form>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js'></script>
-  <script src="./script.js"></script>
   <script type="text/javascript">
     const { to, set, timeline } = gsap
 
